@@ -1,0 +1,11 @@
+fastapi>=0.112
+uvicorn>=0.30
+pydantic>=2.8
+python-multipart>=0.0.6
+requests>=2.31
+python-dotenv>=1.0.1
+openai>=1.30.0
+# Crew orchestration libs (skip on Python 3.13 to avoid install errors)
+crewai>=0.45.0 ; python_version < "3.14"
+langchain>=0.2.3 ; python_version < "3.14"
+langchain-openai>=0.1.7 ; python_version < "3.14"
