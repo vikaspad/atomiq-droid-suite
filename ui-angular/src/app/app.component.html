@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+  <p class="muted">Analyzes your GitHub repo and generates relevant Java unit tests or a real BDD framework using
+    CrewAI.</p>
+
+  <label>GitHub URL (public)</label>
+  <input type="text" [formControl]="form.controls.githubUrl" placeholder="https://github.com/org/repo">
+
+  <label>What should we generate?</label>
+  <div class="inline">
+    <label>
+      <input type="radio" name="gen" [formControl]="form.controls.generation" [value]="'unit'" />
+      Generate Unit test cases
+    </label>
+
+    <label>
+      <input type="radio" name="gen" [formControl]="form.controls.generation" [value]="'bdd'" />
+      Create BDD framework
+    </label>
+  </div>
+
+  <label>Prompt (optional)</label>
+  <textarea rows="4" [formControl]="form.controls.prompt"
+    placeholder="Modules to prioritize, edge-cases, mocking guidance"></textarea>
+
+  <div class="row">
+    <input type="text" [formControl]="form.controls.provider" placeholder="LLM Provider (e.g., openai)">
+    <input type="text" [formControl]="form.controls.model" placeholder="Model (e.g., gpt-4o-mini)">
+    <input type="password" [formControl]="form.controls.apiKey" placeholder="OpenAI API Key (sk-...)">
+  </div>
+
+  <label>Requirement document (optional)</label>
+  <input type="file" (change)="onFile($event)">
+
+  <button (click)="submit()">Generate</button>
+
+  <p class="muted">{{ status }}</p>
+  <pre class="log">{{ log }}</pre>
+
+  <p *ngIf="downloadHref">
+    <a [href]="downloadHref">Download ZIP</a>
+  </p>
+</div>
